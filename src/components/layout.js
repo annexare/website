@@ -3,8 +3,14 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Paper from '@material-ui/core/Paper'
+import { MuiThemeProvider } from '@material-ui/core/styles'
+import { lightTheme } from './themes'
+
 import Header from './header'
-import './layout.css'
+
+import 'typeface-roboto'
 
 const Layout = ({ children, data }) => (
   <StaticQuery
@@ -28,17 +34,20 @@ const Layout = ({ children, data }) => (
         >
           <html lang="en" />
         </Helmet>
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <div
-          style={{
-            margin: '0 auto',
+        
+        <CssBaseline />
+
+        <Header title={data.site.siteMetadata.title} />
+        
+        <MuiThemeProvider theme={lightTheme}>
+          <Paper style={{
+            margin: '64px auto 200vh',
             maxWidth: 960,
-            padding: '0px 1.0875rem 1.45rem',
-            paddingTop: 0,
-          }}
-        >
-          {children}
-        </div>
+            padding: '2em',
+          }}>
+            {children}
+          </Paper>
+        </MuiThemeProvider>
       </>
     )}
   />

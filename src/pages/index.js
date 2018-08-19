@@ -1,14 +1,21 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
+import Typography from '@material-ui/core/Typography';
+
 import Layout from '../components/layout'
 
 const IndexPage = () => (
   <Layout>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <Link to="/page-2/">Go to page 2</Link>
+    <Typography variant="headline" gutterBottom>
+      Welcome
+    </Typography>
+    <Typography paragraph>
+      Paper can be used to build surface or other elements for your application.
+    </Typography>
+    <Typography paragraph>
+      <Link to="/page-2/">Go to page 2</Link>
+    </Typography>
   </Layout>
 )
 
