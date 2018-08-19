@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'gatsby'
 
-// import classNames from 'classnames'
-
 import withStyles from '@material-ui/core/styles/withStyles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -17,11 +15,9 @@ import { MuiThemeProvider } from '@material-ui/core/styles'
 import { darkTheme, lightTheme } from './themes'
 
 const headerStyle = {
-
-}
-
-const changeColorOnScroll = {
-  height: 100
+  minHeightTransition: {
+    transition: 'min-height .2s ease',
+  }
 }
 
 class Header extends Component {
@@ -37,18 +33,26 @@ class Header extends Component {
     this.setState({ isMobileOpen: !this.state.isMobileOpen })
   }
   componentDidMount = () => {
-    window.addEventListener('scroll', this.headerColorChange)
+    window.addEventListener('scroll', this.handleColorChange)
   }
-  headerColorChange = () => {
+  getScrollBreakdownOffset = () => {
+    if (window.location.pathname === '/') {
+      return window.innerHeight * 0.71;
+    }
+
+    return 80;
+  }
+  handleColorChange = () => {
     setTimeout(() => this.setState({
-      isOnTop: window.pageYOffset < changeColorOnScroll.height
+      isOnTop: window.pageYOffset < this.getScrollBreakdownOffset()
     }), 0)
   }
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.headerColorChange)
+    window.removeEventListener('scroll', this.handleColorChange)
   }
   render() {
     const {
+      classes,
       rightLinks,
       title,
     } = this.props
@@ -60,7 +64,11 @@ class Header extends Component {
     return (
       <MuiThemeProvider theme={isOnTop ? darkTheme : lightTheme}>
         <AppBar color="default">
-          <Toolbar disableGutters variant={isOnTop ? 'regular' : 'dense'}>
+          <Toolbar
+            className={classes.minHeightTransition}
+            disableGutters
+            variant={isOnTop ? 'regular' : 'dense'}
+          >
             {homeButton}
             <Hidden xsDown>
               {rightLinks || defaultButton}

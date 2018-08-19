@@ -4,15 +4,16 @@ import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
-import Paper from '@material-ui/core/Paper'
 import { MuiThemeProvider } from '@material-ui/core/styles'
+import { ParallaxProvider } from 'react-scroll-parallax'
+
 import { lightTheme } from './themes'
 
 import Header from './header'
 
 import 'typeface-roboto'
 
-const Layout = ({ children, data }) => (
+const Layout = ({ children }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -34,20 +35,16 @@ const Layout = ({ children, data }) => (
         >
           <html lang="en" />
         </Helmet>
-        
-        <CssBaseline />
 
-        <Header title={data.site.siteMetadata.title} />
-        
-        <MuiThemeProvider theme={lightTheme}>
-          <Paper style={{
-            margin: '64px auto 200vh',
-            maxWidth: 960,
-            padding: '2em',
-          }}>
-            {children}
-          </Paper>
-        </MuiThemeProvider>
+        <ParallaxProvider>
+          <main>
+            <CssBaseline />
+            <Header title={data.site.siteMetadata.title} />
+            <MuiThemeProvider theme={lightTheme}>
+              {children}
+            </MuiThemeProvider>
+          </main>
+        </ParallaxProvider>
       </>
     )}
   />
