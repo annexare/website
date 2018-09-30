@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'gatsby'
 
-import withStyles from '@material-ui/core/styles/withStyles'
 import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import IconButton from '@material-ui/core/IconButton'
 import Button from '@material-ui/core/Button'
-import Hidden from '@material-ui/core/Hidden'
 import Drawer from '@material-ui/core/Drawer'
+import Hidden from '@material-ui/core/Hidden'
+import IconButton from '@material-ui/core/IconButton'
+import Toolbar from '@material-ui/core/Toolbar'
+import withStyles from '@material-ui/core/styles/withStyles'
 
 import MenuIcon from '@material-ui/icons/Menu'
 
@@ -15,8 +15,11 @@ import { MuiThemeProvider } from '@material-ui/core/styles'
 import { darkTheme, lightTheme } from './themes'
 
 const headerStyle = {
+  transparent: {
+    background: 'rgba(0, 0, 0, .9)',
+  },
   minHeightTransition: {
-    transition: 'min-height .2s ease',
+    transition: 'all .2s ease',
   }
 }
 
@@ -63,7 +66,7 @@ class Header extends Component {
 
     return (
       <MuiThemeProvider theme={isOnTop ? darkTheme : lightTheme}>
-        <AppBar color="default">
+        <AppBar color="default" className={isOnTop ? classes.transparent : null}>
           <Toolbar
             className={classes.minHeightTransition}
             disableGutters

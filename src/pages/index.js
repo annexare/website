@@ -12,6 +12,7 @@ import BannerImagePath from '../images/bg.gif'
 
 const bannerStyles = {
   root: {
+    backgroundColor: '#000',
     position: 'relative',
     width: '100%',
     height: '70vh',
@@ -63,7 +64,7 @@ const IndexPage = ({ location }) => (
       image={BannerImagePath}
     />
     <Paper style={{
-      margin: '80px auto 200vh',
+      margin: '2em auto 200vh',
       maxWidth: 960,
       padding: '2em',
     }}>
